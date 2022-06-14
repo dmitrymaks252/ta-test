@@ -1,5 +1,10 @@
-import { CartItemData } from '@Components/cartPage/addCartItemPopup/addCartItemPopup';
 import { Component } from '@Core/component';
+
+type CartItemData = {
+    name: string;
+    price: number;
+    quantity: number;
+};
 
 const SELECTORS = {
     name: './/h2[contains(@class, "name")]',

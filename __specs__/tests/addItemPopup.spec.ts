@@ -19,18 +19,22 @@ describe('Add Item Popup', () => {
         await cartPage.clickAddCartItemButton();
         reporter.endStep();
 
-        // example: const addItemPopup = await cartPage.getAddCartItemPopup();
+        const addItemPopup = await cartPage.getAddCartItemPopup();
 
         reporter.startStep('Fill all fields');
-        // code
+        await addItemPopup.fillOutName(NEW_ITEM_DATA.name);
+        await addItemPopup.fillOutPrice(NEW_ITEM_DATA.price);
+        await addItemPopup.fillOutQuantity(0);
         reporter.endStep();
 
         reporter.startStep('Check error message on `0` as `quantity` value');
-        // example: expect(await addItemPopup.getErrorMessage()).toBe('This field should be greater or equal then 1')
+        await addItemPopup.clickAddNewItemButton();
+        expect(await addItemPopup.getErrorMessage()).toBe('This field should be greater or equal then 1');
         reporter.endStep();
 
         reporter.startStep('Click "Создать"');
-        // code
+        await addItemPopup.fillOutQuantity(NEW_ITEM_DATA.quantity);
+        await addItemPopup.clickAddNewItemButton();
         reporter.endStep();
 
         const cartList = await cartPage.getCartList();

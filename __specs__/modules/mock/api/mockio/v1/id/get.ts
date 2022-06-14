@@ -12,21 +12,21 @@ export class GetCartItemsMock extends MockObject {
     public getFixture(): Record<string, unknown>[] {
         return [
             {
-                id: 1,
-                name: 'Some weird name',
-                price: 1000,
+                name: 'SanDisk 128GB Ultra MicroSDXC',
+                price: undefined,
+                priceForAll: NaN,
                 quantity: 1,
             },
             {
-                id: 2,
-                name: 'This should`n be in snapshot!!',
+                name: 'BENGOO G9000 Stereo Gaming Headset',
                 price: 42,
+                priceForAll: 42,
                 quantity: 1,
             },
             {
-                id: 3,
-                name: 'Wrong Name',
+                name: 'Logitech C922x Pro Stream Webcam',
                 price: 100,
+                priceForAll: 200,
                 quantity: 2,
             },
         ];
