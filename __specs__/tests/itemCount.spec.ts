@@ -48,10 +48,12 @@ describe('Item Quantity', () => {
 
     test("decreasing quantity to zero shouldn't be possible", async () => {
         // Negative quantity test :)
+        await item.removeOne();
+        await item.removeOne();
+        await item.removeOne();
+        await item.removeOne();
+        expect(await item.getQuantity()).toBe(1);
 
-        await item.removeOne();
-        await item.removeOne();
-        await item.removeOne();
         //extra click
         await item.removeOne();
 

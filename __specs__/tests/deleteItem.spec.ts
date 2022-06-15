@@ -1,5 +1,4 @@
 import { CartPageContainer } from '@Components/cartPage/cartPage';
-import { CartItem } from '@Components/cartPage/cartList/cartItem/cartItem';
 
 const INITIAL_STATE = {
     cart: {
@@ -12,31 +11,42 @@ const INITIAL_STATE = {
                 quantity: 5,
                 id: 1,
             },
+            {
+                name: 'Leet o.2674 v4',
+                price: 300,
+                quantity: 10,
+                id: 2,
+            },
         ],
     },
 };
 
 describe('Delete Item', () => {
     let cartPage: CartPageContainer;
-    let item: CartItem;
 
     beforeEach(async () => {
         cartPage = new CartPageContainer();
 
         await cartPage.fulfill(INITIAL_STATE);
-
-        const cartList = await cartPage.getCartList();
-        [item] = await cartList.getCartItems();
     });
 
     test('delete item button should work', async () => {
+        const cartList = await cartPage.getCartList();
+        let items = await cartList.getCartItems();
+
         reporter.startStep('Click delete button should remove cart item');
-        await item.delete();
+        expect(items.length).toBe(2);
+        await items[0].delete();
+
+        items = await cartList.getCartItems();
+
+        expect(items.length).toBe(1);
         reporter.endStep();
 
         const emptyCart = await cartPage.getCartList();
 
         reporter.startStep('Check empty cart message');
+        await items[0].delete();
         expect(await emptyCart.getEmpty()).toBe('Cart is empty');
         reporter.endStep();
     });
